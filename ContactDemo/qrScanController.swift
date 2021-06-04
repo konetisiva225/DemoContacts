@@ -59,7 +59,7 @@ class qrScanController: UIViewController ,AVCaptureMetadataOutputObjectsDelegate
             }
         }
         func alertPromptToAllowCameraAccessViaSetting() {
-            let alert = UIAlertController(title: "Error", message: "Camera access required to letpay", preferredStyle: UIAlertController.Style.alert)
+            let alert = UIAlertController(title: "Error", message: "Camera access required to Contacts demo", preferredStyle: UIAlertController.Style.alert)
 
             alert.addAction(UIAlertAction(title: "Cancel", style: .default))
             alert.addAction(UIAlertAction(title: "Settings", style: .cancel) { (alert) -> Void in
@@ -141,6 +141,11 @@ class qrScanController: UIViewController ,AVCaptureMetadataOutputObjectsDelegate
                 let code:String = readableObject.stringValue {
                     
                 let base64Str:String = (code.data(using: .utf8)?.base64EncodedString())!
+                    
+                    let alert  = UIAlertController(title: "QrCode", message: "Qr Successfully Scanned", preferredStyle: .alert)
+                                       alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                            self.present(alert, animated: true, completion: nil)
+                                       
             
 
                         dismiss(animated: true)
@@ -156,6 +161,9 @@ class qrScanController: UIViewController ,AVCaptureMetadataOutputObjectsDelegate
                     let detector: CIDetector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy:CIDetectorAccuracyHigh]),
                     let ciImage: CIImage = CIImage(image:qrcodeImg),
                     let features = detector.features(in: ciImage) as? [CIQRCodeFeature]
+                    
+                
+                    
                 else {
                     print("Something went wrong")
                     return
@@ -170,6 +178,10 @@ class qrScanController: UIViewController ,AVCaptureMetadataOutputObjectsDelegate
                     print("qrCodeLink is empty!")
                 } else {
                     print("message: \(qrCodeLink)")
+                    let alert  = UIAlertController(title: "QrCode", message: "Qr Successfully Scanned", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    
                 }
                 self.dismiss(animated: true, completion: nil)
         
